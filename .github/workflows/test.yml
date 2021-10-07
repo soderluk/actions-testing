@@ -39,4 +39,4 @@ jobs:
     steps:
       - name: 'Echo stuff'
       run: |
-        echo "Hello!"
+        echo "Hello friend!"
