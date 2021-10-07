@@ -16,20 +16,33 @@ jobs:
     name: 'Foo'
     runs-on: 'ubuntu-latest'
     steps:
+      - uses: 'actions/checkout@v2'
       - name: 'Set environment variable sandbox'
         if: github.base_ref == 'main'
         run: |
           echo "ENV = sandbox"
           echo "ENV=sandbox" >> ${GITHUB_ENV}
-      - name: 'set environment variable production'
+      - name: 'Set environment variable production'
         if: github.event.pull_request.merged == true
         run: |
           echo "ENV = production"
           echo "ENV=production" >> ${GITHUB_ENV}
+      - name: 'Show the set env variables'
+        run: |
+          echo "environment: ${{ env.ENV  }}"
   bar:
     name: 'Bar'
     runs-on: 'ubuntu-latest'
     steps:
+      - uses: 'actions/checkout@v2'
       - name: 'Show env variables'
         run: |
-          echo "environment: " ${{ env.ENV }}
+          echo "environment: ${{ env.ENV }}"
+  baz:
+    name: 'Baz'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - name: 'Echo stuff'
+        run: |
+          echo "Hello friend!"
