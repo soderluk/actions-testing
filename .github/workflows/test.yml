@@ -33,3 +33,10 @@ jobs:
       - name: 'Show env variables'
         run: |
           echo "environment: " ${{ env.ENV }}
+  baz:
+    name: 'Baz'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Echo stuff'
+      run: |
+        echo "Hello!"
