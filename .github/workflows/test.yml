@@ -19,12 +19,12 @@ jobs:
     steps:
       - uses: 'actions/checkout@v2'
       - name: 'Set environment variable sandbox'
-        if: github.base_ref == 'main'
+        if: github.base_ref == 'main' && github.event.pull_request.state != 'closed'
         run: |
           echo "ENV = sandbox"
           echo "ENV=sandbox" >> ${GITHUB_ENV}
       - name: 'Set environment variable production'
-        if: github.action == 'closed' && github.event.pull_request.merged == true
+        if: github.event.pull_request.state == 'closed' && github.event.pull_request.merged == true
         run: |
           echo "ENV = production"
           echo "ENV=production" >> ${GITHUB_ENV}
@@ -34,7 +34,7 @@ jobs:
           echo "Github Action: ${{ github.action }}"
           echo "Github Event: ${{ github.event_name }}"
           echo "Pull request payload: "
-          echo ${{ github.event.pull_request.base.ref }}
-          echo ${{ github.event.pull_request.state }}
-          echo ${{ github.event.pull_request.merged_at }}
+          echo "Base ref: ${{ github.event.pull_request.base.ref }}"
+          echo "State: ${{ github.event.pull_request.state }}"
+          echo "Merged at: ${{ github.event.pull_request.merged_at }}"
           echo "Pull request merged: ${{ github.event.pull_request.merged }}"
