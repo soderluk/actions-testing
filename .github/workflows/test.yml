@@ -5,6 +5,7 @@ on:
     branches:
       - 'main'
   pull_request:
+    types: ['closed', 'synchronize', 'edited', 'opened', 'reopened']
     branches:
       - 'main'
 
@@ -23,7 +24,7 @@ jobs:
           echo "ENV = sandbox"
           echo "ENV=sandbox" >> ${GITHUB_ENV}
       - name: 'Set environment variable production'
-        if: github.event.pull_request.merged == true
+        if: github.action == 'closed' && github.event.pull_request.merged == true
         run: |
           echo "ENV = production"
           echo "ENV=production" >> ${GITHUB_ENV}
