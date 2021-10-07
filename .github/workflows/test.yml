@@ -28,22 +28,10 @@ jobs:
         run: |
           echo "ENV = production"
           echo "ENV=production" >> ${GITHUB_ENV}
-      - name: 'Show the set env variables'
+      - name: 'Show env variables and github stages stuff'
         run: |
-          echo "environment: ${{ env.ENV  }}"
-  bar:
-    name: 'Bar'
-    runs-on: 'ubuntu-latest'
-    steps:
-      - uses: 'actions/checkout@v2'
-      - name: 'Show env variables'
-        run: |
-          echo "environment: ${{ env.ENV }}"
-  baz:
-    name: 'Baz'
-    runs-on: 'ubuntu-latest'
-    steps:
-      - uses: 'actions/checkout@v2'
-      - name: 'Echo stuff'
-        run: |
-          echo "Hello friend!"
+          echo "Environment: ${{ env.ENV  }}"
+          echo "Github Action: ${{ github.action }}"
+          echo "Github Event: ${{ github.event_name }}"
+          echo "Pull request payload: ${{ github.event.pull_request }}"
+          echo "Pull request merged: ${{ github.event.pull_request.merged }}"
