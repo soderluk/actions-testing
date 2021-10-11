@@ -13,6 +13,16 @@ env:
   FORCE_COLOR: 1
 
 jobs:
+  print-ip:
+    name: 'Show Github Container IP address'
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Set public IP'
+        id: ip
+        uses: 'haythem/public-ip@v1.2'
+      - name: 'Show IP'
+        run: |
+          echo ${{ steps.ip.outputs.ipv4 }}
   foo:
     name: 'Foo'
     runs-on: 'ubuntu-latest'
